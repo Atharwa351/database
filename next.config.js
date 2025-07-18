@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['undici'],
   eslint: {
     ignoreDuringBuilds: true,
   },
