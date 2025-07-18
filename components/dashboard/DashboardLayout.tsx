@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { 
@@ -11,35 +10,16 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User, Settings, Database, Bell } from 'lucide-react';
+import { User, Settings, Database, Bell, Home } from 'lucide-react';
+import Link from 'next/link';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-interface User {
-  name: string;
-  email: string;
-}
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    // In a real app, you'd fetch user data from your API
-    setUser({ name: 'John Doe', email: 'john@example.com' });
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/auth/login');
-    } catch (error) {
-      console.error('Logout error:', error);
-      router.push('/auth/login');
-    }
-  };
+  const user = { name: 'Demo User', email: 'demo@example.com' };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -59,6 +39,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
           
           <div className="flex items-center space-x-4">
+            <Link href="/">
+              <Button variant="ghost" size="sm">
+                <Home className="h-5 w-5 text-gray-600" />
+              </Button>
+            </Link>
+            
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="h-5 w-5 text-gray-600" />
               <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
@@ -78,12 +64,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className="flex items-center space-x-2 p-2">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-blue-600 text-white text-sm">
-                      {user?.name?.split(' ').map(n => n[0]).join('') || 'U'}
+                      DU
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium">{user?.name || 'User'}</p>
-                    <p className="text-xs text-gray-500">{user?.email || 'user@example.com'}</p>
+                    <p className="text-sm font-medium">{user.name}</p>
+                    <p className="text-xs text-gray-500">{user.email}</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />
@@ -94,11 +80,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <DropdownMenuItem>
                   <Settings className="mr-2 h-4 w-4" />
                   <span>Settings</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

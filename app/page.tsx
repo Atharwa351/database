@@ -1,22 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Database, Filter, Download, Users, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Check if user is already authenticated
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (isAuthenticated === 'true') {
-      router.push('/dashboard');
-    }
-  }, [router]);
 
   const features = [
     {
@@ -52,11 +41,8 @@ export default function HomePage() {
               <h1 className="text-xl font-bold text-gray-900">Data Explorer</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <Link href="/auth/login">
-                <Button variant="outline">Sign In</Button>
-              </Link>
-              <Link href="/auth/signup">
-                <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+              <Link href="/dashboard">
+                <Button className="bg-blue-600 hover:bg-blue-700">Go to Dashboard</Button>
               </Link>
             </div>
           </div>
@@ -74,15 +60,10 @@ export default function HomePage() {
             and comprehensive export capabilities. Built for professionals who need precise data insights.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth/signup">
+            <Link href="/dashboard">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
-                Start Free Trial
+                Access Dashboard
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/auth/login">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-3">
-                Sign In
               </Button>
             </Link>
           </div>
@@ -131,17 +112,12 @@ export default function HomePage() {
             <CardContent className="py-12 text-center">
               <h3 className="text-3xl font-bold mb-4">Ready to Get Started?</h3>
               <p className="text-xl mb-8 opacity-90">
-                Join thousands of professionals who trust our platform for their data analysis needs
+                Access powerful data filtering and analysis tools
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/auth/signup">
+                <Link href="/dashboard">
                   <Button size="lg" variant="secondary" className="text-lg px-8 py-3">
-                    Create Free Account
-                  </Button>
-                </Link>
-                <Link href="/auth/login">
-                  <Button size="lg" variant="outline" className="text-lg px-8 py-3 text-white border-white hover:bg-white hover:text-blue-600">
-                    Sign In
+                    Access Dashboard
                   </Button>
                 </Link>
               </div>
