@@ -7,12 +7,27 @@ import DataTable from '@/components/dashboard/DataTable';
 
 interface DataItem {
   id?: number;
-  'Company Name': string;
-  'Job title': string;
-  'Industry': string;
-  'Region': string;
-  'Metro': string;
-  'Location': string;
+  full_name: string;
+  industry: string;
+  job_title: string;
+  emails: string;
+  mobile: string;
+  phone_number: string;
+  company_name: string;
+  company_website: string;
+  company_size: string;
+  location: string;
+  metro: string;
+  region: string;
+  middle_initial: string;
+  middle_name: string;
+  linkedin_url: string;
+  company_location_region: string;
+  company_location_address_line_2: string;
+  location_country: string;
+  source_state: string;
+  row_hash: string;
+  created_at: string;
   [key: string]: any;
 }
 
@@ -108,7 +123,7 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex h-full bg-gray-50">
+      <div className="flex h-screen bg-gray-50">
         <FilterSidebar
           columns={filterableColumns}
           columnLabels={columnLabels}
@@ -117,7 +132,7 @@ export default function DashboardPage() {
           onClearAllFilters={clearAllFilters}
           totalResults={totalItems}
         />
-        <div className="flex-1 p-6">
+        <div className="flex-1 overflow-hidden">
           <DataTable
             data={data}
             currentPage={currentPage}
